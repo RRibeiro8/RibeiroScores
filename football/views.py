@@ -29,12 +29,24 @@ class PortugalView(View):
 		data_matches = response.json()['data']
 
 		dates = {}	
-		for jogo in data_hist['match']:
+		#print(data_hist)
+		# print("##")
+		# print("##")
+		# print("##")
+		# print(data_matches)
 
+		# print("##")
+		# print("##")
+		# print("##")
+
+		
+		for jogo in data_hist['match']:
+			print(jogo['score'].split(' - '))
 			game = {"home": jogo['home_name'],
 					"away": jogo['away_name'],
-					"score": jogo['score'],
-					"hour": jogo['scheduled']
+					"score": jogo['score'].split(' - '),
+					"hour": jogo['scheduled'],
+					"status": jogo['status'],
 			}
 
 			if jogo['date'] not in dates:
@@ -48,7 +60,8 @@ class PortugalView(View):
 				game = {"home": jogo['home_name'],
 						"away": jogo['away_name'],
 						"local": jogo['location'],
-						"hour": jogo['time'][0:5]
+						"hour": jogo['time'][0:5],
+						"status": "COMING",
 				}
 
 				if jogo['date'] not in dates:

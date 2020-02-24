@@ -48,11 +48,34 @@
                     <!-- /.timeline-label -->
                       {% for match in value %}
                         <!-- timeline item -->
-                        <div>
-                          <i class="fas fa-futbol bg-black"></i>
-                          <div class="timeline-item">
-                            <span class="time"><i class="fas fa-clock"> {{ match.hour }}</i>  </span>
-                            <h3 class="timeline-header no-border"><a href="#">{{ match.home }}</a> x <a href="#">{{ match.away }}</a></h3>
+                        {% if match.status == 'FINISHED' %}
+                          <div>
+                              <i class="fas fa-futbol bg-black"></i>
+                              <div class="timeline-item row">
+                              
+                                <span class="time " style="margin-top: auto; margin-bottom: auto; "><i class="fas fa-clock"> {{ match.hour }}</i></span>
+                              <div class="timeline-body col">
+                                <div class="row">
+                                  <a href="#">{{ match.home }}</a>
+                                </div>
+                                <div class="row">
+                                  <a href="#">{{ match.away }}</a>
+                                </div>
+
+                              </div>
+                              <div class="timeline-body col">
+                                <div class="row">
+                                  <a>{{ match.score.0 }}</a>
+                                </div>
+                                <div class="row">
+                                  <a>{{ match.score.1 }}</a>
+                                </div>
+
+                              </div>
+                              <div class="timeline-body col">
+
+                            </div>
+                    
 
           <!--                   <div class="timeline-body">
                             </div> 
@@ -61,6 +84,39 @@
                           </div>
                         </div>
                         <!-- END timeline item -->
+
+                        {% else %}
+
+                        <div>
+                          <i class="fas fa-futbol bg-black"></i>
+                          <div class="timeline-item row">
+                          
+                            <span class="time " style="margin-top: auto; margin-bottom: auto; "><i class="fas fa-clock"> {{ match.hour }}</i></span>
+                          <div class="timeline-body col">
+                            <div class="row">
+                              <a href="#">{{ match.home }}</a>
+                            </div>
+                            <div class="row">
+                              <a href="#">{{ match.away }}</a>
+                            </div>
+
+                          </div>
+                          <div class="timeline-body col" style="margin-top: auto; margin-bottom: auto; ">
+                            <div class="row">
+                              <a>{{ match.local }}</a>
+                            </div>
+
+                          </div>
+                          <div class="timeline-body col">
+
+                        </div>
+
+                         </div>
+                        </div>
+
+
+                        {% endif %}
+
 
                       {% endfor %}      
 
