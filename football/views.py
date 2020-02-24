@@ -9,6 +9,21 @@ querystring = {"secret":"5UwNDirf9EsCEVCV4K6O7fbdeieXReFW","key":"g97bKn8m6Z60Jy
 headers = {'x-rapidapi-host': "live-score-api.p.rapidapi.com",
     'x-rapidapi-key': "c5428d8bc5msh26174ba8bed4d70p13c153jsne42ab237d205"}
 
+class LiveView(View):
+
+	template_name = 'football/live.html'
+	url = "https://live-score-api.p.rapidapi.com/scores/live.json"
+
+	def get(self, request):
+
+		response = requests.request("GET", self.url, headers=headers, params=querystring)
+		data = response.json()
+
+		print(data)
+		context = {}
+		return render(request, self.template_name, context)
+
+
 class PortugalView(View):
 
 	template_name = 'football/pt.html'
