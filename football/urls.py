@@ -1,6 +1,11 @@
 from django.urls import path
-from .views import PortugalView
+from .views import PortugalView, EnglandView, SpainView, ItalyView, FranceView, GermanyView
 
 urlpatterns = [
-    path('', PortugalView.as_view(), name='pt'),
+    path('pt/', PortugalView.as_view(), name='pt'),
+    path('en/', EnglandView.as_view(), name='en'),
+    path('es/', SpainView.as_view(), name='es'),
+    path('fr/', FranceView.as_view(), name='fr'),
+    path('ge/', GermanyView.as_view(), name='ge'),
+    path('it/', ItalyView.as_view(), name='it'),
 ]

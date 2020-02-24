@@ -124,20 +124,38 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'pt' %}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas nav-icon"><img src="{% static 'img/pt_flag.png' %}" style="width:18px;height:18px;"></i>
                   <p>Portugal</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Espanha</p>
+                <a href="{% url 'es' %}" class="nav-link">
+                  <i class="fas nav-icon"><img src="{% static 'img/es_flag.png' %}" style="width:18px;height:18px;"></i>
+                  <p>Spain</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inglaterra</p>
+                <a href="{% url 'en' %}" class="nav-link">
+                  <i class="fas nav-icon"><img src="{% static 'img/en_flag.png' %}" style="width:18px;height:18px;"></i>
+                  <p>England</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'it' %}" class="nav-link">
+                  <i class="fas nav-icon"><img src="{% static 'img/it_flag.png' %}" style="width:18px;height:18px;"></i>
+                  <p>Italy</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'ge' %}" class="nav-link">
+                  <i class="fas nav-icon"><img src="{% static 'img/ge_flag.png' %}" style="width:18px;height:18px;"></i>
+                  <p>Germany</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'fr' %}" class="nav-link">
+                  <i class="fas nav-icon"><img src="{% static 'img/fr_flag.png' %}" style="width:18px;height:18px;"></i>
+                  <p>France</p>
                 </a>
               </li>
             </ul>

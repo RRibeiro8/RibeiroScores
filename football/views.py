@@ -29,19 +29,8 @@ class PortugalView(View):
 		data_matches = response.json()['data']
 
 		dates = {}	
-		#print(data_hist)
-		# print("##")
-		# print("##")
-		# print("##")
-		# print(data_matches)
-
-		# print("##")
-		# print("##")
-		# print("##")
-
-		
 		for jogo in data_hist['match']:
-			print(jogo['score'].split(' - '))
+			#print(jogo['score'].split(' - '))
 			game = {"home": jogo['home_name'],
 					"away": jogo['away_name'],
 					"score": jogo['score'].split(' - '),
@@ -69,9 +58,266 @@ class PortugalView(View):
 				else:
 					dates[jogo['date']].append(game)
 
-			
-			#print(jogo['date'], jogo['scheduled'])			
-			#print(jogo['home_name'], " VS ", jogo['away_name'])
-			#print(jogo['score'])
+		context = {"queryset": dates}
+		return render(request, self.template_name, context)
+
+class EnglandView(View):
+
+	template_name = 'football/en.html'
+	url_hist = "https://live-score-api.p.rapidapi.com/scores/history.json"
+	url_matches = "https://live-score-api.p.rapidapi.com/fixtures/matches.json"
+	def get(self, request):
+
+		qs = querystring
+		qs['competition_id'] = "2"
+		qs_hist = qs
+
+		qs_hist['from'] = str(datetime.date.today() - datetime.timedelta(days=7))
+		qs_hist['to'] = str(datetime.date.today())
+		response = requests.request("GET", self.url_hist, headers=headers, params=qs_hist)
+		data_hist = response.json()['data']
+
+		response = requests.request("GET", self.url_matches, headers=headers, params=querystring)
+		data_matches = response.json()['data']
+
+		dates = {}	
+		for jogo in data_hist['match']:
+			#print(jogo['score'].split(' - '))
+			game = {"home": jogo['home_name'],
+					"away": jogo['away_name'],
+					"score": jogo['score'].split(' - '),
+					"hour": jogo['scheduled'],
+					"status": jogo['status'],
+			}
+
+			if jogo['date'] not in dates:
+				dates[jogo['date']] = [game]
+			else:
+				dates[jogo['date']].append(game)
+
+		for jogo in data_matches['fixtures']:
+
+			if jogo['date'] <= str(datetime.date.today() + datetime.timedelta(days=7)):
+				game = {"home": jogo['home_name'],
+						"away": jogo['away_name'],
+						"local": jogo['location'],
+						"hour": jogo['time'][0:5],
+						"status": "COMING",
+				}
+
+				if jogo['date'] not in dates:
+					dates[jogo['date']] = [game]
+				else:
+					dates[jogo['date']].append(game)
+
+		context = {"queryset": dates}
+		return render(request, self.template_name, context)
+
+class SpainView(View):
+
+	template_name = 'football/es.html'
+	url_hist = "https://live-score-api.p.rapidapi.com/scores/history.json"
+	url_matches = "https://live-score-api.p.rapidapi.com/fixtures/matches.json"
+	def get(self, request):
+
+		qs = querystring
+		qs['competition_id'] = "3"
+		qs_hist = qs
+
+		qs_hist['from'] = str(datetime.date.today() - datetime.timedelta(days=7))
+		qs_hist['to'] = str(datetime.date.today())
+		response = requests.request("GET", self.url_hist, headers=headers, params=qs_hist)
+		data_hist = response.json()['data']
+
+		response = requests.request("GET", self.url_matches, headers=headers, params=querystring)
+		data_matches = response.json()['data']
+
+		dates = {}	
+		for jogo in data_hist['match']:
+			#print(jogo['score'].split(' - '))
+			game = {"home": jogo['home_name'],
+					"away": jogo['away_name'],
+					"score": jogo['score'].split(' - '),
+					"hour": jogo['scheduled'],
+					"status": jogo['status'],
+			}
+
+			if jogo['date'] not in dates:
+				dates[jogo['date']] = [game]
+			else:
+				dates[jogo['date']].append(game)
+
+		for jogo in data_matches['fixtures']:
+
+			if jogo['date'] <= str(datetime.date.today() + datetime.timedelta(days=7)):
+				game = {"home": jogo['home_name'],
+						"away": jogo['away_name'],
+						"local": jogo['location'],
+						"hour": jogo['time'][0:5],
+						"status": "COMING",
+				}
+
+				if jogo['date'] not in dates:
+					dates[jogo['date']] = [game]
+				else:
+					dates[jogo['date']].append(game)
+
+		context = {"queryset": dates}
+		return render(request, self.template_name, context)
+
+
+class ItalyView(View):
+
+	template_name = 'football/it.html'
+	url_hist = "https://live-score-api.p.rapidapi.com/scores/history.json"
+	url_matches = "https://live-score-api.p.rapidapi.com/fixtures/matches.json"
+	def get(self, request):
+
+		qs = querystring
+		qs['competition_id'] = "4"
+		qs_hist = qs
+
+		qs_hist['from'] = str(datetime.date.today() - datetime.timedelta(days=7))
+		qs_hist['to'] = str(datetime.date.today())
+		response = requests.request("GET", self.url_hist, headers=headers, params=qs_hist)
+		data_hist = response.json()['data']
+
+		response = requests.request("GET", self.url_matches, headers=headers, params=querystring)
+		data_matches = response.json()['data']
+
+		dates = {}	
+		for jogo in data_hist['match']:
+			#print(jogo['score'].split(' - '))
+			game = {"home": jogo['home_name'],
+					"away": jogo['away_name'],
+					"score": jogo['score'].split(' - '),
+					"hour": jogo['scheduled'],
+					"status": jogo['status'],
+			}
+
+			if jogo['date'] not in dates:
+				dates[jogo['date']] = [game]
+			else:
+				dates[jogo['date']].append(game)
+
+		for jogo in data_matches['fixtures']:
+
+			if jogo['date'] <= str(datetime.date.today() + datetime.timedelta(days=7)):
+				game = {"home": jogo['home_name'],
+						"away": jogo['away_name'],
+						"local": jogo['location'],
+						"hour": jogo['time'][0:5],
+						"status": "COMING",
+				}
+
+				if jogo['date'] not in dates:
+					dates[jogo['date']] = [game]
+				else:
+					dates[jogo['date']].append(game)
+
+		context = {"queryset": dates}
+		return render(request, self.template_name, context)
+
+class FranceView(View):
+
+	template_name = 'football/fr.html'
+	url_hist = "https://live-score-api.p.rapidapi.com/scores/history.json"
+	url_matches = "https://live-score-api.p.rapidapi.com/fixtures/matches.json"
+	def get(self, request):
+
+		qs = querystring
+		qs['competition_id'] = "5"
+		qs_hist = qs
+
+		qs_hist['from'] = str(datetime.date.today() - datetime.timedelta(days=7))
+		qs_hist['to'] = str(datetime.date.today())
+		response = requests.request("GET", self.url_hist, headers=headers, params=qs_hist)
+		data_hist = response.json()['data']
+
+		response = requests.request("GET", self.url_matches, headers=headers, params=querystring)
+		data_matches = response.json()['data']
+
+		dates = {}	
+		for jogo in data_hist['match']:
+			#print(jogo['score'].split(' - '))
+			game = {"home": jogo['home_name'],
+					"away": jogo['away_name'],
+					"score": jogo['score'].split(' - '),
+					"hour": jogo['scheduled'],
+					"status": jogo['status'],
+			}
+
+			if jogo['date'] not in dates:
+				dates[jogo['date']] = [game]
+			else:
+				dates[jogo['date']].append(game)
+
+		for jogo in data_matches['fixtures']:
+
+			if jogo['date'] <= str(datetime.date.today() + datetime.timedelta(days=7)):
+				game = {"home": jogo['home_name'],
+						"away": jogo['away_name'],
+						"local": jogo['location'],
+						"hour": jogo['time'][0:5],
+						"status": "COMING",
+				}
+
+				if jogo['date'] not in dates:
+					dates[jogo['date']] = [game]
+				else:
+					dates[jogo['date']].append(game)
+
+		context = {"queryset": dates}
+		return render(request, self.template_name, context)
+
+class GermanyView(View):
+
+	template_name = 'football/ge.html'
+	url_hist = "https://live-score-api.p.rapidapi.com/scores/history.json"
+	url_matches = "https://live-score-api.p.rapidapi.com/fixtures/matches.json"
+	def get(self, request):
+
+		qs = querystring
+		qs['competition_id'] = "1"
+		qs_hist = qs
+
+		qs_hist['from'] = str(datetime.date.today() - datetime.timedelta(days=7))
+		qs_hist['to'] = str(datetime.date.today())
+		response = requests.request("GET", self.url_hist, headers=headers, params=qs_hist)
+		data_hist = response.json()['data']
+
+		response = requests.request("GET", self.url_matches, headers=headers, params=querystring)
+		data_matches = response.json()['data']
+
+		dates = {}	
+		for jogo in data_hist['match']:
+			#print(jogo['score'].split(' - '))
+			game = {"home": jogo['home_name'],
+					"away": jogo['away_name'],
+					"score": jogo['score'].split(' - '),
+					"hour": jogo['scheduled'],
+					"status": jogo['status'],
+			}
+
+			if jogo['date'] not in dates:
+				dates[jogo['date']] = [game]
+			else:
+				dates[jogo['date']].append(game)
+
+		for jogo in data_matches['fixtures']:
+
+			if jogo['date'] <= str(datetime.date.today() + datetime.timedelta(days=7)):
+				game = {"home": jogo['home_name'],
+						"away": jogo['away_name'],
+						"local": jogo['location'],
+						"hour": jogo['time'][0:5],
+						"status": "COMING",
+				}
+
+				if jogo['date'] not in dates:
+					dates[jogo['date']] = [game]
+				else:
+					dates[jogo['date']].append(game)
+
 		context = {"queryset": dates}
 		return render(request, self.template_name, context)
